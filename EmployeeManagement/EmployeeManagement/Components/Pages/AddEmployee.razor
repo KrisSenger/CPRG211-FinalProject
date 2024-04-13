@@ -39,17 +39,20 @@
 
 @code {
     private Employee employee = new Employee();
+    private string message;
 
     private async Task HandleValidSubmit()
     {
         if (employeeService.AddEmployee(employee))
         {
-            // Success logic, e.g., display a notification or redirect
-            employee = new Employee(); // Reset form on successful addition
+            
+            employee = new Employee(); // Resets the form on successful addition
         }
         else
         {
             // Failure logic, e.g., display error message
+            message = "Failed to add employee. Please try again.";
+            
         }
     }
 }
