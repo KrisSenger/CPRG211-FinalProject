@@ -1,0 +1,55 @@
+﻿@page "/addemployee"
+@using EmployeeManagement.Models
+@using EmployeeManagement.Services
+@inject EmployeeService employeeService
+
+<h3>Add New Employee</h3>
+
+<EditForm Model="@employee" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <InputText id="firstName" class="form-control" @bind-Value="employee.FirstName" />
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <InputText id="lastName" class="form-control" @bind-Value="employee.LastName" />
+    </div>
+
+    <div class="form-group">
+        <label for="department">Department:</label>
+        <InputText id="department" class="form-control" @bind-Value="employee.Department" />
+    </div>
+
+    <div class="form-group">
+        <label for="position">Position:</label>
+        <InputText id="position" class="form-control" @bind-Value="employee.Position" />
+    </div>
+
+    <div class="form-group">
+        <label for="baseSalary">Base Salary:</label>
+        <InputNumber id="baseSalary" class="form-control" @bind-Value="employee.BaseSalary" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add Employee</button>
+</EditForm>
+
+@code {
+    private Employee employee = new Employee();
+
+    private async Task HandleValidSubmit()
+    {
+        if (employeeService.AddEmployee(employee))
+        {
+            // Success logic, e.g., display a notification or redirect
+            employee = new Employee(); // Reset form on successful addition
+        }
+        else
+        {
+            // Failure logic, e.g., display error message
+        }
+    }
+}

@@ -1,0 +1,10 @@
+﻿@page "/test"
+
+<h3>Test</h3>
+
+<button class="btn btn-primary" @onclick="DBC.Update">Test Update?</button>
+
+@code{
+    @using Oracle.ManagedDataAccess.Client;
+    DatabaseConnect DBC = new DatabaseConnect();
+}

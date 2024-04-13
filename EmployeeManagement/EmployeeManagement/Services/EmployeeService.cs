@@ -1,50 +1,46 @@
-﻿using MySqlConnector;
-using System.Collections.Generic;
-using EmployeeManagement.Data;
-using Microsoft.Maui.Controls;
-// Employee service to interact with the database
-public class EmployeeService
+﻿using Oracle.ManagedDataAccess.Client;
+using EmployeeManagement.Models;
+
+namespace EmployeeManagement.Services
 {
-    private readonly string connectionString; // Connection string to database
-
-    public EmployeeService()
+    public class EmployeeService
     {
-        MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder()
-        {
-            Server = "localhost",
-            Database = "employeemanagement",
-            UserID = "root",
-            Password = "password",
-        };
+        private string connectionString;
 
-        connectionString = builder.ConnectionString;
-    }
-
-    public async Task<List<Employee>> GetEmployeesAsync()
-    {
-        using (var connection = new MySqlConnection(connectionString))
+        public EmployeeService(string user, string pwd, string db)
         {
-            await connection.OpenAsync();
-            var command = new MySqlCommand("SELECT * FROM Employees", connection);
-            using (var reader = await command.ExecuteReaderAsync())
+            connectionString = $"User ID={user};Password={pwd};Data Source={db};";
+        }
+
+        public bool AddEmployee(Employee employee)
+        {
+            string query = "INSERT INTO employee (first_name, last_name, department, position, base_salary) VALUES (:firstName, :lastName, :department, :position, :baseSalary)";
+            using (OracleConnection con = new OracleConnection(connectionString))
             {
-                var employees = new List<Employee>();
-                while (await reader.ReadAsync())
+                OracleCommand cmd = new OracleCommand(query, con);
+                cmd.Parameters.Add("firstName", OracleDbType.Varchar2).Value = employee.FirstName;
+                cmd.Parameters.Add("lastName", OracleDbType.Varchar2).Value = employee.LastName;
+                cmd.Parameters.Add("department", OracleDbType.Varchar2).Value = employee.Department;
+                cmd.Parameters.Add("position", OracleDbType.Varchar2).Value = employee.Position;
+                cmd.Parameters.Add("baseSalary", OracleDbType.Decimal).Value = employee.BaseSalary;
+
+                try
                 {
-                    employees.Add(new Employee
-                    {
-                        EmployeeId = reader.GetInt32("employee_id"),
-                        FirstName = reader.GetString("first_name"),
-                        LastName = reader.GetString("last_name"),
-                        DepartmentId = reader.GetInt32("department_id"),
-                        PositionTitle = reader.GetString("position_title"),
-                        BaseSalary = reader.GetDecimal("base_salary")
-                    });
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    return true;
                 }
-                return employees;
+                catch (Exception ex)
+                {
+                    // Log exception or handle it appropriately
+                    return false;
+                }
             }
         }
-    }
 
-    
+        public string GetConnectionString()
+        {
+            return connectionString;
+        }
+    }
 }
