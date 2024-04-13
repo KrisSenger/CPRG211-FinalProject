@@ -23,19 +23,19 @@ namespace EmployeeManagement.Services
                 OracleCommand cmd = new OracleCommand(query, con);
                 cmd.Parameters.Add("firstName", OracleDbType.Varchar2).Value = employee.FirstName;
                 cmd.Parameters.Add("lastName", OracleDbType.Varchar2).Value = employee.LastName;
-                //cmd.Parameters.Add("department", OracleDbType.Int32).Value = int.Parse(employee.Department); // Assuming 'Department' is a string that can be parsed to int
-                //cmd.Parameters.Add("position", OracleDbType.Int32).Value = int.Parse(employee.Position);    // Assuming 'Position' is a string that can be parsed to int
+                //cmd.Parameters.Add("department", OracleDbType.Int32).Value = int.Parse(employee.Department); // Not sure how to do this yet
+                //cmd.Parameters.Add("position", OracleDbType.Int32).Value = int.Parse(employee.Position);    
                 //cmd.Parameters.Add("baseSalary", OracleDbType.Decimal).Value = employee.BaseSalary;
 
                 try
                 {
                     con.Open();
-                    cmd.ExecuteNonQuery(); // Execute the command
+                    cmd.ExecuteNonQuery(); 
                     return true;
                 }
                 catch (Exception ex)
                 {
-                    // Better error handling: log the error
+                    
                     System.Diagnostics.Debug.WriteLine("Error: " + ex.Message);
                     return false;
                 }
