@@ -40,7 +40,7 @@ namespace EmployeeManagement
         
         public void Update()
         {
-            string query = "UPDATE employee SET base_salary = 2.00 WHERE first_name = 'Roger' AND last_name = 'Rabbit'";
+            string query = "UPDATE employee SET base_salary = 1.99 WHERE first_name = 'Roger' AND last_name = 'Rabbit'";
             string connectUser = "User ID=" + user + ";Password=" + pwd + ";Data Source=" + db + ";";
 
             using (OracleConnection con = new OracleConnection(connectUser))
@@ -48,6 +48,7 @@ namespace EmployeeManagement
                 OracleCommand cmd = new OracleCommand(query, con);
                 cmd.Connection.Open();
                 cmd.ExecuteNonQuery();
+                cmd.Connection.Close();
             }
         }
     }
