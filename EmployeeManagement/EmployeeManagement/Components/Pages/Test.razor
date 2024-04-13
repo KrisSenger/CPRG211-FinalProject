@@ -1,0 +1,30 @@
+﻿@page "/test"
+
+
+
+<h3>Test</h3>
+
+
+<button class="btn btn-primary" @onclick="DBC.Update">Test Update?</button>
+
+@code {
+    @using Oracle.ManagedDataAccess.Client;
+    DatabaseConnect DBC = new DatabaseConnect();
+    public static string user = "cprg211";
+    public static string pwd = "password";
+    public static string db = "localhost/XE";
+
+    //Testing database connection with an update
+    // private void Update()
+    // {
+    //     string query = "UPDATE employee SET base_salary = 1.00 WHERE first_name = 'Roger' AND last_name = 'Rabbit'";
+    //     string connectUser = "User ID=" + user + ";Password=" + pwd + ";Data Source=" + db + ";";
+
+    //     using (OracleConnection con = new OracleConnection(connectUser))
+    //     {
+    //         OracleCommand cmd = new OracleCommand(query, con);
+    //         cmd.Connection.Open();
+    //         cmd.ExecuteNonQuery();
+    //     }
+    // }
+}
