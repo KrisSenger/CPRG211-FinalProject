@@ -1,0 +1,97 @@
+﻿@page "/edit"
+
+<div id="add">
+    <h1>Edit Employee</h1>
+    <div id="side-by-side">
+        <div id="left-side">
+            <form>
+                <label for="emp-id">Employee ID</label>
+                <input type="text" name="emp-id" />
+                <label for="firstname">Edit First Name</label>
+                <input type="text" name="firstname" />
+                <label for="lastname">Edit Last Name</label>
+                <input type="text" name="lastname" />
+                <label for="departments">Edit Department</label>
+                <select name="departments">
+                    <option value="dept1">dept1</option>
+                    <option value="dept2">dept2</option>
+                    <option value="dept3">dept3</option>
+                </select>
+                <label for="position">Edit Position</label>
+                <select name="position">
+                    <option value="pos1">pos1</option>
+                    <option value="pos2">pos2</option>
+                    <option value="pos3">pos3</option>
+                </select>
+                <label for="salary">Edit Base Salary</label>
+                <input type="number" name="salary" />
+            </form>
+        </div>
+
+        <div id="right-side">
+            <h3>Current Employee Information:</h3>
+            <div id="emp-info">
+                <p>Name: {}</p>
+                <p>Department: {}</p>
+                <p>Position: {}</p>
+                <p>Salary: {}</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="buttons">
+        <button type="submit">Save Employee</button>
+        <button type="submit">Delete Employee</button>
+        <button>Cancel</button>
+    </div>
+</div>
+
+<style>
+    #edit {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    #side-by-side {
+        display: flex;
+        gap: 5rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    input {
+        width: 20vw;
+    }
+
+    label {
+        padding-top: 2rem;
+    }
+    #emp-info {
+        border: 2px solid black;
+        padding: 3rem;
+    }
+
+    #buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 5rem;
+    }
+
+    button {
+        width: fit-content;
+        height: fit-content;
+        padding-block: 1rem;
+        padding-inline: 2rem;
+        background-color: #D8829D;
+    }
+
+</style>
