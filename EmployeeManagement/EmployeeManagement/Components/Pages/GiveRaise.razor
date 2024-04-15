@@ -1,29 +1,15 @@
-﻿@page "/edit"
+﻿@page "/raise"
 
-<div id="edit">
-    <h1>Edit Employee</h1>
+<div id="raise">
+    <h1>Give Employee Raise/Bonus</h1>
     <div id="side-by-side">
         <div id="left-side">
             <form>
                 <label for="emp-id">Employee ID</label>
                 <input type="text" name="emp-id" />
-                <label for="firstname">Edit First Name</label>
-                <input type="text" name="firstname" />
-                <label for="lastname">Edit Last Name</label>
-                <input type="text" name="lastname" />
-                <label for="departments">Edit Department</label>
-                <select name="departments">
-                    <option value="dept1">dept1</option>
-                    <option value="dept2">dept2</option>
-                    <option value="dept3">dept3</option>
-                </select>
-                <label for="position">Edit Position</label>
-                <select name="position">
-                    <option value="pos1">pos1</option>
-                    <option value="pos2">pos2</option>
-                    <option value="pos3">pos3</option>
-                </select>
-                <label for="salary">Edit Base Salary</label>
+                <label for="salary">New Base Salary</label>
+                <input type="number" name="salary" />
+                <label for="bonus">Bonus</label>
                 <input type="number" name="salary" />
             </form>
         </div>
@@ -40,14 +26,13 @@
     </div>
 
     <div id="buttons">
-        <button type="submit">Save Employee</button>
-        <button type="submit">Delete Employee</button>
+        <button type="submit">Save</button>
         <button>Cancel</button>
     </div>
 </div>
 
 <style>
-    #edit {
+    #raise {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -72,6 +57,7 @@
     label {
         padding-top: 2rem;
     }
+
     #emp-info {
         border: 2px solid black;
         padding: 3rem;

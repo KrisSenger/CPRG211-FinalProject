@@ -1,0 +1,60 @@
+﻿@page "/viewall"
+
+<div id="viewall">
+    <h1>View All Employees</h1>
+    <h3>Employee 1</h3>
+    <div id="emp-info">
+        <p>Name: {}</p>
+        <p>Department: {}</p>
+        <p>Position: {}</p>
+        <p>Salary: {}</p>
+    </div>
+
+    <h3>Employee 2</h3>
+    <div id="emp-info">
+        <p>Name: {}</p>
+        <p>Department: {}</p>
+        <p>Position: {}</p>
+        <p>Salary: {}</p>
+    </div>
+
+    <div id="buttons">
+        <button>Back</button>
+    </div>
+</div>
+
+<style>
+    #viewall {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    h3 {
+        margin-top: 2rem;
+    }
+
+    #emp-info {
+        border: 2px solid black;
+        padding: 3rem;
+        width: 20vw;
+    }
+
+    #buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 5rem;
+    }
+
+    button {
+        width: fit-content;
+        height: fit-content;
+        padding-block: 1rem;
+        padding-inline: 2rem;
+        background-color: #D8829D;
+    }
+
+</style>
