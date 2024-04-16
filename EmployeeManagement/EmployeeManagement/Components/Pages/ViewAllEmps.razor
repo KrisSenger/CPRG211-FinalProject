@@ -2,21 +2,11 @@
 
 <div id="viewall">
     <h1>View All Employees</h1>
-    <h3>Employee 1</h3>
-    <div id="emp-info">
-        <p>Name: {}</p>
-        <p>Department: {}</p>
-        <p>Position: {}</p>
-        <p>Salary: {}</p>
-    </div>
 
-    <h3>Employee 2</h3>
-    <div id="emp-info">
-        <p>Name: {}</p>
-        <p>Department: {}</p>
-        <p>Position: {}</p>
-        <p>Salary: {}</p>
-    </div>
+    @foreach (var emp in AllEmployees())
+    {
+    <ViewEmployees ID=@emp.EmployeeID Name=@(emp.FirstName + " " + emp.LastName) Department=@emp.DeptName Position=@emp.PositionTitle Salary=@emp.TotalComp></ViewEmployees>;
+    }
 
     <div id="buttons">
         <button>Back</button>
@@ -34,7 +24,7 @@
         margin-top: 2rem;
     }
 
-    #emp-info {
+    .emp-info {
         border: 2px solid black;
         padding: 3rem;
         width: 20vw;
@@ -58,3 +48,14 @@
     }
 
 </style>
+
+@code {
+    GetEmployee ge = new GetEmployee();
+
+    public List<GetEmployee.Employee> AllEmployees()
+    {
+        GetEmployee ge = new GetEmployee();
+        var employees = ge.GetEmployees();
+        return employees;
+    }
+}

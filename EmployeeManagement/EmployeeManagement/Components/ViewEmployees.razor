@@ -1,0 +1,27 @@
+﻿<div id="viewall">
+    <h3>@Name</h3>
+    <div class="emp-info">
+        <p>Employee ID#: @ID</p>
+        <p>Department: @Department</p>
+        <p>Position: @Position</p>
+        <p>Salary: @Salary</p>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Department { get; set; }
+
+    [Parameter]
+    public string Position { get; set; }
+
+    [Parameter]
+    public double Salary { get; set; }
+
+}
