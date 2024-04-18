@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
@@ -20,17 +19,17 @@ namespace EmployeeManagement
         public bool DBConnect()
         {
             string connectUser = "User ID=" + user + ";Password=" + pwd + ";Data Source=" + db + ";";
-            
+
             using (OracleConnection con = new OracleConnection(connectUser))
             {
-                using (OracleCommand cmd = con.CreateCommand()) 
-                { 
+                using (OracleCommand cmd = con.CreateCommand())
+                {
                     try
                     {
                         con.Open();
                         return true;
                     }
-                    catch (Exception ex)  
+                    catch (Exception ex)
                     {
                         Application.Current.MainPage.DisplayAlert("Cannot connect", "Please Try again later", "OK");
                         return false;
@@ -38,10 +37,10 @@ namespace EmployeeManagement
                 }
             }
         }
-        
+
         public void Update()
         {
-            string query = "UPDATE employee SET base_salary = 1.99 WHERE first_name = 'Roger' AND last_name = 'Rabbit'";
+            string query = "UPDATE employee SET base_salary = 3000 WHERE first_name = 'Roger' AND last_name = 'Rabbit'";
             string connectUser = "User ID=" + user + ";Password=" + pwd + ";Data Source=" + db + ";";
 
             using (OracleConnection con = new OracleConnection(connectUser))
