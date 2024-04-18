@@ -14,8 +14,8 @@ namespace EmployeeManagement
 {
     public class EditEmployee
     {
-        public static string user = "cprg211";
-        public static string pwd = "password";
+        public static string user = "C##cprg211";
+        public static string pwd = "cprg211pass";
         public static string db = "localhost/XE";
 
         public class Employee
