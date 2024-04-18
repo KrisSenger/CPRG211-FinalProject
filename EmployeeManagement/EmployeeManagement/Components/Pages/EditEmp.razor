@@ -5,44 +5,63 @@
     <div id="side-by-side">
         <div id="left-side">
             <form>
-                <label for="emp-id">Employee ID</label>
-                <input type="text" name="emp-id" />
+                <label>Search Employee</label><input class="form-control" type="text" id="code" name="code" @bind="inputEmployeeID">
                 <label for="firstname">Edit First Name</label>
-                <input type="text" name="firstname" />
+                <input type="text" name="firstname" @bind="editEmployee.FirstName" />
                 <label for="lastname">Edit Last Name</label>
-                <input type="text" name="lastname" />
+                <input type="text" name="lastname" @bind="editEmployee.LastName" />
                 <label for="departments">Edit Department</label>
-                <select name="departments">
-                    <option value="dept1">dept1</option>
-                    <option value="dept2">dept2</option>
-                    <option value="dept3">dept3</option>
+                <select name="departments" @bind="editEmployee.DeptName">
+                    <option value="Accounting">Accounting</option>
+                    <option value="HR">HR</option>
+                    <option value="Legal">Legal</option>
+                    <option value="Sales">Sales</option>
+                    <option value="IT">IT</option>
+                    <option value="Marketing">Marketing</option>
                 </select>
                 <label for="position">Edit Position</label>
-                <select name="position">
-                    <option value="pos1">pos1</option>
-                    <option value="pos2">pos2</option>
-                    <option value="pos3">pos3</option>
+                <select name="position" @bind="editEmployee.PositionTitle">
+                    <option value="Accountant">Accountant</option>
+                    <option value="Accounts Payable Clerk">Accounts Payable Clerk</option>
+                    <option value="Accounts Receivable Clerk">Accounts Receivable Clerk</option>
+                    <option value="HR Manager">HR Manager</option>
+                    <option value="HR Assistant">HR Assistant</option>
+                    <option value="Legal Counsel">Legal Counsel</option>
+                    <option value="Legal Assistant">Legal Assistant</option>
+                    <option value="Sales Manager">Sales Manager</option>
+                    <option value="Sales Representative">Sales Representative</option>
+                    <option value="IT Manager">IT Manager</option>
+                    <option value="IT Specialist">IT Specialist</option>
+                    <option value="Marketing Manager">Marketing Manager</option>
+                    <option value="Marketing Coordinator">Marketing Coordinator</option>
+
                 </select>
                 <label for="salary">Edit Base Salary</label>
-                <input type="number" name="salary" />
+                <input type="number" name="salary" @bind="editEmployee.BaseSalary" />
+                <div class="search-button-container" style="position: relative; top: 20px; left: 90px;">
+                    <button type="button" class="search-button" @onclick="LoadEmployee">Search</button>
+                </div>
             </form>
         </div>
 
         <div id="right-side">
             <h3>Current Employee Information:</h3>
             <div id="emp-info">
-                <p>Name: {}</p>
-                <p>Department: {}</p>
-                <p>Position: {}</p>
-                <p>Salary: {}</p>
+                <p>Name: @editEmployee.FirstName @editEmployee.LastName</p>
+                <p>Department: @editEmployee.DeptName</p>
+                <p>Position: @editEmployee.PositionTitle</p>
+                <p>Salary: @editEmployee.BaseSalary</p>
             </div>
+            <p>@errorMessage</p>
         </div>
     </div>
 
     <div id="buttons">
-        <button type="submit">Save Employee</button>
+        <button type="submit" @onclick="SaveEmployee">Save Employee</button>
         <button type="submit">Delete Employee</button>
-        <button>Cancel</button>
+        <NavLink class="nav-link" href="/">
+            <button>Cancel</button>
+        </NavLink>
     </div>
 </div>
 
@@ -95,3 +114,28 @@
     }
 
 </style>
+
+@code {
+    string inputEmployeeID = "";
+    EditEmployee.Employee editEmployee = new EditEmployee.Employee();
+    string errorMessage = "";
+
+    private void LoadEmployee()
+    {
+        if (!string.IsNullOrEmpty(inputEmployeeID) && int.TryParse(inputEmployeeID, out int employeeID))
+        {
+            EditEmployee employeeService = new EditEmployee();
+            editEmployee = employeeService.GetEmployeeByID(employeeID);
+        }
+    }
+
+    private void SaveEmployee()
+    {
+        if (editEmployee != null)
+        {
+            EditEmployee employeeService = new EditEmployee();
+            employeeService.UpdateEmployee(editEmployee);
+        }
+    }
+
+}

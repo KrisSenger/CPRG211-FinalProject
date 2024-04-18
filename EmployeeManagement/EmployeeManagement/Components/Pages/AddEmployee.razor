@@ -1,0 +1,107 @@
+﻿@page "/addemployee"
+@using EmployeeManagement.Models
+@using EmployeeManagement.Services
+@inject EmployeeService employeeService
+
+<div id="add">
+    <h1>Add New Employee</h1>
+
+    <EditForm Model="@employee" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <InputText id="firstName" class="form-control" @bind-Value="employee.FirstName" />
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <InputText id="lastName" class="form-control" @bind-Value="employee.LastName" />
+        </div>
+
+        <div class="form-group">
+            <label for="department">Department:</label>
+            <InputText id="department" class="form-control" @bind-Value="employee.Department" />
+        </div>
+
+        <div class="form-group">
+            <label for="position">Position:</label>
+            <InputText id="position" class="form-control" @bind-Value="employee.Position" />
+        </div>
+
+        <div class="form-group">
+            <label for="baseSalary">Base Salary:</label>
+            <InputNumber id="baseSalary" class="form-control" @bind-Value="employee.BaseSalary" />
+        </div>
+
+        <div id="buttons">
+            <button type="submit">Add Employee</button>
+            <NavLink class="nav-link" href="/">
+                <button>Cancel</button>
+            </NavLink>
+        </div>
+
+    </EditForm>
+</div>
+
+<style>
+    #add {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    input {
+        width: 20vw;
+    }
+    label {
+        padding-top: 2rem;
+    }
+    #buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    }
+    button {
+        width: fit-content;
+        height: fit-content;
+        padding-block: 1rem;
+        padding-inline: 2rem;
+        background-color: #D8829D;
+    }
+
+</style>
+
+
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-danger">@message</div>
+}
+
+@code {
+
+    private Employee employee = new Employee();
+    private string message;
+
+    private async Task HandleValidSubmit()
+    {
+        Console.WriteLine(employee.FirstName);
+        if (employeeService.AddEmployee(employee))
+        {
+            message = "Employee added successfully!"; // Display success message
+            employee = new Employee(); // Resets the form on successful addition
+        }
+        else
+        {
+            message = "Failed to add employee. Please try again."; // Display error message
+        }
+    }
+}
