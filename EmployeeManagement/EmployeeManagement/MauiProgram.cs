@@ -21,7 +21,7 @@ namespace EmployeeManagement
     		builder.Services.AddBlazorWebViewDeveloperTools();
     		builder.Logging.AddDebug();
 #endif
-            builder.Services.AddSingleton<EmployeeService>(new EmployeeService("C##cprg211", "cprg211pass", "localhost/XE"));
+            builder.Services.AddSingleton<EmployeeService>(new EmployeeService("cprg211", "password", "localhost/XE"));
 
             return builder.Build();
         }

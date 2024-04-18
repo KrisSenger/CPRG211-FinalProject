@@ -87,12 +87,13 @@
 }
 
 @code {
-    
+
     private Employee employee = new Employee();
     private string message;
 
     private async Task HandleValidSubmit()
     {
+        Console.WriteLine(employee.FirstName);
         if (employeeService.AddEmployee(employee))
         {
             message = "Employee added successfully!"; // Display success message
