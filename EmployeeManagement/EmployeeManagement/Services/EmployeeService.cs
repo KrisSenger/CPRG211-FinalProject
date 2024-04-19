@@ -17,15 +17,15 @@ namespace EmployeeManagement.Services
 
         public bool AddEmployee(Employee employee)
         {
-            string query = "INSERT INTO employee (first_name, last_name) VALUES (:firstName, :lastName)";
+            string query = "INSERT INTO employee (first_name, last_name, department_id, position_id, base_salary) VALUES (:firstName, :lastName, :department, :position, :baseSalary)";
             using (OracleConnection con = new OracleConnection(connectionString))
             {
                 OracleCommand cmd = new OracleCommand(query, con);
                 cmd.Parameters.Add("firstName", OracleDbType.Varchar2).Value = employee.FirstName;
                 cmd.Parameters.Add("lastName", OracleDbType.Varchar2).Value = employee.LastName;
-                //cmd.Parameters.Add("department", OracleDbType.Int32).Value = int.Parse(employee.Department); // Not sure how to do this yet
-                //cmd.Parameters.Add("position", OracleDbType.Int32).Value = int.Parse(employee.Position);    
-                //cmd.Parameters.Add("baseSalary", OracleDbType.Decimal).Value = employee.BaseSalary;
+                cmd.Parameters.Add("department", OracleDbType.Int32).Value = int.Parse(employee.Department); 
+                cmd.Parameters.Add("position", OracleDbType.Int32).Value = int.Parse(employee.Position);    
+                cmd.Parameters.Add("baseSalary", OracleDbType.Decimal).Value = employee.BaseSalary;
 
                 try
                 {
