@@ -1,5 +1,47 @@
 ﻿@page "/"
 
-<h1>Employee Management System</h1>
+<div id="home">
+    <h1>Welcome to Office Orchestrator!</h1>
 
-Welcome to your new app.
+    <div id="buttons">
+        <NavLink class="nav-link" href="addemployee">
+            <button>Add Employee</button>
+        </NavLink>
+        <NavLink class="nav-link" href="edit">
+            <button>Edit Employee</button>
+        </NavLink>
+        <NavLink class="nav-link" href="raise">
+            <button>Give Raise</button>
+        </NavLink>
+        <NavLink class="nav-link" href="viewall">
+            <button>View All Employees</button>
+        </NavLink>
+    </div>
+</div>
+
+<style>
+    :root {
+        background-color: #F3F9E3;
+    }
+    #home {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 20vh;
+        color: #050517;
+    }
+    #buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    button {
+        width: fit-content;
+        height: fit-content;
+        padding-block: 1rem;
+        padding-inline: 2rem;
+        background-color: #D8829D;
+    }
+</style>

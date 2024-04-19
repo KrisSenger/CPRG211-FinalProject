@@ -1,0 +1,63 @@
+﻿@page "/viewall"
+
+<div id="viewall">
+    <h1>View All Employees</h1>
+
+    @foreach (var emp in AllEmployees())
+    {
+    <ViewEmployees ID=@emp.EmployeeID Name=@(emp.FirstName + " " + emp.LastName) Department=@emp.DeptName Position=@emp.PositionTitle Salary=@emp.TotalComp></ViewEmployees>;
+    }
+
+    <div id="buttons">
+        <NavLink class="nav-link" href="/">
+            <button>Back</button>
+        </NavLink>
+    </div>
+</div>
+
+<style>
+    #viewall {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    h3 {
+        margin-top: 2rem;
+    }
+
+    .emp-info {
+        border: 2px solid black;
+        padding: 3rem;
+        width: 20vw;
+    }
+
+    #buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 5rem;
+    }
+
+    button {
+        width: fit-content;
+        height: fit-content;
+        padding-block: 1rem;
+        padding-inline: 2rem;
+        background-color: #D8829D;
+    }
+
+</style>
+
+@code {
+    GetEmployee ge = new GetEmployee();
+
+    public List<GetEmployee.Employee> AllEmployees()
+    {
+        GetEmployee ge = new GetEmployee();
+        var employees = ge.GetEmployees();
+        return employees;
+    }
+}
