@@ -58,7 +58,7 @@
 
     <div id="buttons">
         <button type="submit" @onclick="SaveEmployee">Save Employee</button>
-        <button type="submit">Delete Employee</button>
+        <button type="submit" @onclick="DeleteEmployee">Delete Employee</button>
         <button>Cancel</button>
     </div>
 </div>
@@ -133,6 +133,17 @@
         {
             EditEmployee employeeService = new EditEmployee();
             employeeService.UpdateEmployee(editEmployee);
+        }
+    }
+
+    private void DeleteEmployee()
+    {
+        if (!string.IsNullOrEmpty(inputEmployeeID) && int.TryParse(inputEmployeeID, out int employeeID))
+        {
+            EditEmployee employeeService = new EditEmployee();
+            employeeService.DeleteEmployee(employeeID);
+            editEmployee = new EditEmployee.Employee();
+            inputEmployeeID = "";
         }
     }
 
