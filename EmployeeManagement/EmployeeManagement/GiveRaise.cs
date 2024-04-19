@@ -1,14 +1,13 @@
 ﻿using Oracle.ManagedDataAccess.Client;
 using System;
 using System.Collections.Generic;
-using System.DirectoryServices.Protocols;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EmployeeManagement
 {
-    public class EditEmployee
+    public class GiveRaiseBonus
     {
         public static string user = "cprg211";
         public static string pwd = "password";
@@ -22,8 +21,8 @@ namespace EmployeeManagement
             public string DeptName { get; set; }
             public string PositionTitle { get; set; }
             public double BaseSalary { get; set; }
+            public double Bonus { get; set; }
         }
-
         public Employee GetEmployeeByID(int employeeID)
         {
             string query = "SELECT first_name, last_name, dept_name, position_title, base_salary FROM EMPLOYEE NATURAL JOIN department NATURAL JOIN position WHERE employee_id = :employeeID";
@@ -52,40 +51,20 @@ namespace EmployeeManagement
             }
             return employee;
         }
-
-        public void UpdateEmployee(Employee employee)
+        public void NewSalaryBonus(Employee employee)
         {
             string query = "UPDATE EMPLOYEE " +
-               "SET first_name = :firstName, last_name = :lastName, " +
-               "department_id = (SELECT department_id FROM department WHERE dept_name = :deptName), " +
-               "position_id = (SELECT position_id FROM position WHERE position_title = :positionTitle), " +
-               "base_salary = :baseSalary " +
+               "SET base_salary = :baseSalary, " +
+               "bonuses = :bonus " +
                "WHERE employee_id = :employeeID";
             string connectUser = "User ID=" + user + ";Password=" + pwd + ";Data Source=" + db + ";";
 
             using (OracleConnection con = new OracleConnection(connectUser))
             {
                 OracleCommand cmd = new OracleCommand(query, con);
-                cmd.Parameters.Add(":firstName", OracleDbType.Varchar2).Value = employee.FirstName;
-                cmd.Parameters.Add(":lastName", OracleDbType.Varchar2).Value = employee.LastName;
-                cmd.Parameters.Add(":deptName", OracleDbType.Varchar2).Value = employee.DeptName;
-                cmd.Parameters.Add(":positionTitle", OracleDbType.Varchar2).Value = employee.PositionTitle;
                 cmd.Parameters.Add(":baseSalary", OracleDbType.Double).Value = employee.BaseSalary;
+                cmd.Parameters.Add(":bonus", OracleDbType.Double).Value = employee.Bonus;
                 cmd.Parameters.Add(":employeeID", OracleDbType.Int32).Value = employee.EmployeeID;
-
-                con.Open();
-                cmd.ExecuteNonQuery();
-            }
-        }
-        public void DeleteEmployee(int employeeID)
-        {
-            string query = "DELETE FROM EMPLOYEE WHERE employee_id = :employeeID";
-            string connectUser = "User ID=" + user + ";Password=" + pwd + ";Data Source=" + db + ";";
-
-            using (OracleConnection con = new OracleConnection(connectUser))
-            {
-                OracleCommand cmd = new OracleCommand(query, con);
-                cmd.Parameters.Add(":employeeID", OracleDbType.Int32).Value = employeeID;
 
                 con.Open();
                 cmd.ExecuteNonQuery();

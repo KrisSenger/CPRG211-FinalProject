@@ -5,31 +5,32 @@
     <div id="side-by-side">
         <div id="left-side">
             <form>
-                <label for="emp-id">Employee ID</label>
-                <input type="text" name="emp-id" />
-                <label for="salary">New Base Salary</label>
-                <input type="number" name="salary" />
-                <label for="bonus">Bonus</label>
-                <input type="number" name="salary" />
+                <label>Search Employee</label><input class="form-control" type="text" id="code" name="code" @bind="inputEmployeeID">
+                <label for="salary">Edit Base Salary</label>
+                <input type="number" name="salary" @bind="editEmployee.BaseSalary" />
+                <label for="bonus">Edit Bonus</label>
+                <input type="number" name="bonus" @bind="editEmployee.Bonus" />
+                <div class="search-button-container" style="position: relative; top: 20px; left: 90px;">
+                    <button type="button" class="search-button" @onclick="LoadEmployee">Search</button>
+                </div>
             </form>
         </div>
 
         <div id="right-side">
             <h3>Current Employee Information:</h3>
             <div id="emp-info">
-                <p>Name: {}</p>
-                <p>Department: {}</p>
-                <p>Position: {}</p>
-                <p>Salary: {}</p>
+                <p>Name: @editEmployee.FirstName @editEmployee.LastName</p>
+                <p>Department: @editEmployee.DeptName</p>
+                <p>Position: @editEmployee.PositionTitle</p>
+                <p>Salary: @editEmployee.BaseSalary</p>
             </div>
+            <p>@errorMessage</p>
         </div>
     </div>
 
     <div id="buttons">
         <button type="submit">Save</button>
-        <NavLink class="nav-link" href="/">
-            <button>Cancel</button>
-        </NavLink>
+        <button>Cancel</button>
     </div>
 </div>
 
@@ -83,3 +84,27 @@
     }
 
 </style>
+
+@code {
+    string inputEmployeeID = "";
+    GiveRaiseBonus.Employee editEmployee = new GiveRaiseBonus.Employee();
+    string errorMessage = "";
+
+    private void LoadEmployee()
+    {
+        if (!string.IsNullOrEmpty(inputEmployeeID) && int.TryParse(inputEmployeeID, out int employeeID))
+        {
+            GiveRaiseBonus employeeService = new GiveRaiseBonus();
+            editEmployee = employeeService.GetEmployeeByID(employeeID);
+        }
+    }
+
+    private void SaveEmployee()
+    {
+        if (editEmployee != null)
+        {
+            GiveRaiseBonus employeeService = new GiveRaiseBonus();
+            employeeService.NewSalaryBonus(editEmployee);
+        }
+    }
+}
