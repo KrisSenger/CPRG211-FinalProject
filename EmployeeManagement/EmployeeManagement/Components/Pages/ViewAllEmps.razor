@@ -3,6 +3,7 @@
 <div id="viewall">
     <h1>View All Employees</h1>
 
+    @*Loop through list of employees created from database and assign parameters for each employee to an employee card *@
     @foreach (var emp in AllEmployees())
     {
     <ViewEmployees ID=@emp.EmployeeID Name=@(emp.FirstName + " " + emp.LastName) Department=@emp.DeptName Position=@emp.PositionTitle Salary=@emp.TotalComp></ViewEmployees>;

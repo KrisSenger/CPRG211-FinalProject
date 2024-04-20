@@ -14,5 +14,6 @@ namespace EmployeeManagement.Models
         public string Department { get; set; }
         public string Position { get; set; }
         public decimal BaseSalary { get; set; }
+        public decimal Bonuses { get; set;}
     }
 }

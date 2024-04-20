@@ -22,17 +22,47 @@
 
         <div class="form-group">
             <label for="department">Department:</label>
-            <InputText id="department" class="form-control" @bind-Value="employee.Department" />
+            @* <InputText id="department" class="form-control" @bind-Value="employee.Department" /> *@
+            <select name="departments" @bind="employee.Department">
+                <option>Select Department</option>
+                <option value="001">Accounting</option>
+                <option value="002">HR</option>
+                <option value="003">Legal</option>
+                <option value="004">Sales</option>
+                <option value="005">IT</option>
+                <option value="006">Marketing</option>
+            </select>
         </div>
 
         <div class="form-group">
             <label for="position">Position:</label>
-            <InputText id="position" class="form-control" @bind-Value="employee.Position" />
+            @* <InputText id="position" class="form-control" @bind-Value="employee.Position" /> *@
+            <select name="position" @bind="employee.Position">
+                <option>Select Position</option>
+                <option value="1">Accountant</option>
+                <option value="2">Accounts Payable Clerk</option>
+                <option value="3">Accounts Receivable Clerk</option>
+                <option value="4">HR Manager</option>
+                <option value="5">HR Assistant</option>
+                <option value="6">Legal Counsel</option>
+                <option value="7">Legal Assistant</option>
+                <option value="8">Sales Manager</option>
+                <option value="9">Sales Representative</option>
+                <option value="10 Manager">IT Manager</option>
+                <option value="11">IT Specialist</option>
+                <option value="12">Marketing Manager</option>
+                <option value="13">Marketing Coordinator</option>
+            </select>
         </div>
 
         <div class="form-group">
             <label for="baseSalary">Base Salary:</label>
             <InputNumber id="baseSalary" class="form-control" @bind-Value="employee.BaseSalary" />
+        </div>
+
+        <div class="form-group">
+            <label for="baseSalary">Bonuses:</label>
+            <InputNumber id="baseSalary" class="form-control" @bind-Value="employee.Bonuses" />
         </div>
 
         <div id="buttons">
@@ -53,16 +83,25 @@
         align-items: center;
         gap: 2rem;
     }
+
     form {
         display: flex;
         flex-direction: column;
     }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
     input {
         width: 20vw;
     }
+
     label {
         padding-top: 2rem;
     }
+
     #buttons {
         display: flex;
         flex-direction: row;
@@ -70,6 +109,7 @@
         align-items: center;
         gap: 2rem;
     }
+
     button {
         width: fit-content;
         height: fit-content;

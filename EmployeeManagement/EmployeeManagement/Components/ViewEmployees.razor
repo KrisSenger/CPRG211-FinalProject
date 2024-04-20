@@ -1,12 +1,16 @@
-﻿<div id="viewall">
+﻿@* Component for View All Employees page for the basic employee card*@
+
+<div id="viewall">
     <h3>@Name</h3>
     <div class="emp-info">
         <p>Employee ID#: @ID</p>
         <p>Department: @Department</p>
         <p>Position: @Position</p>
-        <p>Salary: @Salary</p>
+        <p>Total Compensation: @Salary</p>
     </div>
 </div>
+
+@* Create parameters requried for the component*@
 
 @code {
     [Parameter]
@@ -22,6 +26,6 @@
     public string Position { get; set; }
 
     [Parameter]
-    public double Salary { get; set; }
+    public decimal Salary { get; set; }
 
 }

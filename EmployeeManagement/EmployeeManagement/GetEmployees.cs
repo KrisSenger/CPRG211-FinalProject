@@ -15,16 +15,16 @@ namespace EmployeeManagement
             public int EmployeeID { get; set; }
             public string FirstName { get; set; }
             public string LastName { get; set; }
-            public double BaseSalary { get; set; }
-            public double Bonuses { get; set; }
-            public double TotalComp { get; set; }
+            public decimal BaseSalary { get; set; }
+            public decimal Bonuses { get; set; }
+            public decimal TotalComp { get; set; }
             public int DepartmentID { get; set; }
             public string DeptName { get; set; }
             public int PositionID { get; set; }
             public string PositionTitle { get; set; }
         }
 
-
+        // Create list of employees and attributes from database
         public List<Employee> GetEmployees()
         {
             string query = "SELECT employee_id, first_name, last_name, base_salary, bonuses, SUM(base_salary + bonuses) AS \"Total Comp\", department_id, dept_name, position_id, position_title FROM EMPLOYEE NATURAL JOIN department NATURAL JOIN position  GROUP BY employee_id, first_name, last_name, base_salary, bonuses, department_id, dept_name, position_id, position_title ORDER BY employee_id";
@@ -44,9 +44,9 @@ namespace EmployeeManagement
                         employee.EmployeeID = reader.GetInt32(0);
                         employee.FirstName = reader.GetString(1);
                         employee.LastName = reader.GetString(2);
-                        employee.BaseSalary = reader.GetDouble(3);
-                        employee.Bonuses = reader.GetDouble(4);
-                        employee.TotalComp = reader.GetDouble(5);
+                        employee.BaseSalary = reader.GetDecimal(3);
+                        employee.Bonuses = reader.GetDecimal(4);
+                        employee.TotalComp = reader.GetDecimal(5);
                         employee.DepartmentID = reader.GetInt32(6);
                         employee.DeptName = reader.GetString(7);
                         employee.PositionID = reader.GetInt32(8);
