@@ -116,10 +116,16 @@
 
 </style>
 
+@if (!string.IsNullOrEmpty(message))
+{
+    <div class="alert alert-danger">@message</div>
+}
+
 @code {
     string inputEmployeeID = "";
     EditEmployee.Employee editEmployee = new EditEmployee.Employee();
     string errorMessage = "";
+    private string message;
 
     private void LoadEmployee()
     {
@@ -136,6 +142,11 @@
         {
             EditEmployee employeeService = new EditEmployee();
             employeeService.UpdateEmployee(editEmployee);
+            errorMessage = "Employee successfully saved!";
+        } 
+        else 
+        {
+            errorMessage = "Employee save unsuccessful.";
         }
     }
 
@@ -147,6 +158,11 @@
             employeeService.DeleteEmployee(employeeID);
             editEmployee = new EditEmployee.Employee();
             inputEmployeeID = "";
+            errorMessage = "Employee successfully deleted!";
+        }
+        else
+        {
+            errorMessage = "Employee deletion unsuccessful.";
         }
     }
 
