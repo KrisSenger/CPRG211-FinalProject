@@ -108,6 +108,11 @@
         {
             GiveRaiseBonus employeeService = new GiveRaiseBonus();
             employeeService.NewSalaryBonus(editEmployee);
+            errorMessage = "Employee successfully saved!";
+        }
+        else
+        {
+            errorMessage = "Employee save unsuccessful.";
         }
     }
 }
